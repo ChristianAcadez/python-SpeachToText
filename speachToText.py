@@ -1,20 +1,15 @@
 import speech_recognition as sr
-import pyttsx3
+from gtts import gTTS
 
-# initialice the recognizer
+language = "en"
 r = sr.Recognizer()
 
 def record_text():
-    # loop in case of errors
     while(1):
         try:
-            # use the microphone as source of input
             with sr.Microphone() as source2:
-                # prepare the recognizer to receive an input
                 r.adjust_for_ambient_noise(source2, duration=0.2)
-                # listens to the user's input
                 audio2 = r.listen(source2)
-                # using google to recognize audio
                 MyText = r.recognize_google(audio2)
                 return MyText
             
@@ -31,7 +26,13 @@ def output_text(text):
     f.close()
     return
 
+def text_to_speach(text):
+    speech = gTTS(text=text, lang=language, slow=False, tld="com.mx")
+    speech.save("TTS.mp3")
+    return
+
 while(1):
     text = record_text()
     output_text(text)
+    #text_to_speach(text)
     print("wrote text")
