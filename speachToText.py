@@ -5,19 +5,18 @@ language = "en"
 r = sr.Recognizer()
 
 def record_text():
-    while(1):
-        try:
-            with sr.Microphone() as source2:
-                r.adjust_for_ambient_noise(source2, duration=0.2)
-                audio2 = r.listen(source2)
-                MyText = r.recognize_google(audio2)
-                return MyText
+    try:
+        with sr.Microphone() as source2:
+            r.adjust_for_ambient_noise(source2, duration=0.2)
+            audio2 = r.listen(source2)
+            MyText = r.recognize_google(audio2)
+            return MyText
             
-        except sr.RequestError as e:
-            print("Could not request results; {0}".format(e))
+    except sr.RequestError as e:
+        print("Could not request results; {0}".format(e))
         
-        except sr.UnknownValueError:
-            print("Unkown error ocurred.")
+    except sr.UnknownValueError:
+        print("Unkown error ocurred.")
 
 def output_text(text):
     f = open("output.txt","a")
@@ -26,13 +25,12 @@ def output_text(text):
     f.close()
     return
 
-def text_to_speach(text):
-    speech = gTTS(text=text, lang=language, slow=False, tld="com.mx")
-    speech.save("TTS.mp3")
-    return
-
-while(1):
+# this is going to be changed with a wake up voice
+flag = True
+while(flag):
     text = record_text()
     output_text(text)
-    #text_to_speach(text)
     print("wrote text")
+    again = input("speak again? y/n: ")
+    if(again == "n"):
+        flag = False
