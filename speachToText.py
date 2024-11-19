@@ -1,7 +1,5 @@
 import speech_recognition as sr
-from gtts import gTTS
 
-language = "en"
 r = sr.Recognizer()
 
 def record_text():
@@ -25,12 +23,12 @@ def output_text(text):
     f.close()
     return
 
-# this is going to be changed with a wake up voice
+# this is going to be changed with a wake up word
 flag = True
 while(flag):
     text = record_text()
     output_text(text)
     print("wrote text")
     again = input("speak again? y/n: ")
-    if(again == "n"):
+    if(again == "n"): 
         flag = False
