@@ -37,7 +37,7 @@ def voice_response(text):
     speech.save("TTS.mp3")
 
 # This will be replaced for a wake up word
-text = record_text()
+text = record_text()+", Answer should be less than 80 words."
 print(text)
 if(text != None):
     gemini_search = voice_search(text)
