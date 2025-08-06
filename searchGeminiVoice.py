@@ -1,5 +1,5 @@
 import speech_recognition as sr
-import google.generativeai as genai
+import google.genai as genai
 import os
 from gtts import gTTS
 from dotenv import load_dotenv
